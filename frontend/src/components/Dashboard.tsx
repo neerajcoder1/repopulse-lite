@@ -32,7 +32,7 @@ export const Dashboard = () => {
     { subject: "Churn", A: result.metrics.code_churn.score, fullMark: 20 },
     { subject: "Hygiene", A: result.metrics.commit_hygiene.score, fullMark: 25 },
     { subject: "Cadence", A: result.metrics.cadence.score, fullMark: 15 },
-    { subject: "Entropy", A: result.metrics.author_distribution.entropy_score, fullMark: 20 },
+    { subject: "Entropy", A: result.metrics.author_distribution.score, fullMark: 20 },
     { subject: "Stability", A: result.metrics.anomaly_risk.score, fullMark: 20 },
   ] : [];
 

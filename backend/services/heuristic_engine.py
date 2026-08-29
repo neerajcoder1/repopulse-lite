@@ -140,7 +140,7 @@ class HeuristicEngine:
             
         n = len(authors)
         if n == 1:
-            return {"contributor_count": 1, "entropy_score": 10}
+            return {"contributor_count": 1, "score": 10}
             
         total = sum(authors.values())
         entropy = 0
@@ -153,7 +153,7 @@ class HeuristicEngine:
         
         return {
             "contributor_count": n,
-            "entropy_score": max(0, min(20, int(score)))
+            "score": max(0, min(20, int(score)))
         }
 
     def _calculate_anomaly_risk(self):
