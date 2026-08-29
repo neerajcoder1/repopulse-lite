@@ -1,0 +1,25 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+app = FastAPI(title="RepoPulse Lite API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins for development
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class AnalyzeRequest(BaseModel):
+    repo_url: str
+
+@app.get("/api/health")
+async def health_check():
+    return {"status": "ok", "version": "1.0.0"}
+
+@app.post("/api/analyze")
+async def analyze_repo(request: AnalyzeRequest):
+    # TODO: Implement GitHub ingestion and heuristic engine
+    return {"message": "Not implemented yet"}
