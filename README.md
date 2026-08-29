@@ -3,6 +3,7 @@
 > A full-stack GitHub Repository Health Analyzer that transforms repository and commit telemetry into an explainable 0–100 engineering health score and an AI-generated executive risk report.
 
 [![GitHub](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/neerajcoder1/repopulse-lite)
+<img width="920" height="425" alt="image" src="https://github.com/user-attachments/assets/2912c678-a8bc-48ad-8d0f-a9e3f6259545" />
 
 ---
 
