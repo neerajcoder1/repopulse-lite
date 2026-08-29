@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Search, AlertTriangle, Github, Activity, Users, GitCommit, FileWarning } from "lucide-react";
-import { analyzeRepo, AnalysisResult } from "../services/api";
+import { analyzeRepo, type AnalysisResult } from "../services/api";
 import { ScoreGauge } from "./ScoreGauge";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
 
