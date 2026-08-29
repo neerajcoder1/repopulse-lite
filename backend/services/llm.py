@@ -1,6 +1,6 @@
 import httpx
 from fastapi import HTTPException
-from ..config import settings
+from config import settings
 
 class LLMService:
     def __init__(self):
@@ -32,7 +32,7 @@ class LLMService:
                 {"role": "system", "content": "You are a senior technical auditor."},
                 {"role": "user", "content": prompt}
             ],
-            "max_tokens": 500,
+            "max_tokens": 2000,
             "temperature": 0.2
         }
 
