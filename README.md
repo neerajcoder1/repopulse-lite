@@ -1,111 +1,175 @@
-<div align="center">
-  
-  # 📈 RepoPulse Lite
+# RepoPulse Lite
 
-  **Deterministic GitHub Repository Health & Risk Analysis Dashboard**
-  <br />
-  A full-stack application that analyzes GitHub repositories, scores their health deterministically based on engineering metrics, and generates AI-powered executive risk reports.
+> A full-stack GitHub Repository Health Analyzer that transforms repository and commit telemetry into an explainable 0–100 engineering health score and an AI-generated executive risk report.
 
-  [![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://repopulse-lite-ashen.vercel.app)
-  [![API Status](https://img.shields.io/badge/API-Render-blue?style=for-the-badge&logo=render)](https://repopulse-lite-4jml.onrender.com/docs)
-  
-</div>
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-black)](https://github.com/neerajcoder1/repopulse-lite)
 
 ---
 
-## 🌟 Features
+## Live Demo
 
-- **Deterministic Heuristic Engine:** Calculates a 0-100 score based on hard telemetry (not AI hallucination).
-  - Code Churn & Volatility
-  - Commit Message Hygiene (Conventional Commits)
-  - Development Cadence
-  - Author Entropy (Bus Factor & Normalized Shannon Entropy)
-  - Anomaly Detection (Mega-commits, force-pushes, etc.)
-- **LLM Executive Summary:** Integrates with Groq's high-speed AI (Llama 3 / Qwen) to write a detailed markdown report explaining the deterministic score.
-- **Beautiful Telemetry Dashboard:** Built with React, Tailwind CSS v4, and Recharts for interactive radar and gauge charts.
+**Production Application:**  
+`YOUR_VERCEL_URL`
 
----
+**Backend API:**  
+`YOUR_RENDER_BACKEND_URL`
 
-## 🛠️ Tech Stack
-
-### Frontend
-- **Framework:** React 18 (Vite)
-- **Styling:** Tailwind CSS v4
-- **Charts:** Recharts
-- **Icons:** Lucide React
-- **Markdown:** React-Markdown + Remark-GFM
-
-### Backend
-- **Framework:** FastAPI (Python)
-- **HTTP Client:** HTTPX
-- **Data Validation:** Pydantic
-- **AI Integration:** OpenAI-compatible API (Groq)
+> Replace the URLs above after deployment.
 
 ---
 
-## 🚀 Live Deployment
+## About the Project
 
-- **Frontend Application:** [https://repopulse-lite-ashen.vercel.app](https://repopulse-lite-ashen.vercel.app)
-- **Backend API Docs:** [https://repopulse-lite-4jml.onrender.com/docs](https://repopulse-lite-4jml.onrender.com/docs)
+RepoPulse Lite is a full-stack engineering analytics platform designed to analyze the development health of a public GitHub repository.
 
----
+The application accepts a public GitHub repository URL, retrieves repository and recent commit telemetry through the GitHub REST API, processes that telemetry using a deterministic heuristic scoring engine, calculates a 0–100 Repository Health Score, identifies potential engineering risks, and uses an OpenAI-compatible LLM to generate an executive-level risk and hygiene report.
 
-## 💻 Local Development
-
-If you wish to run RepoPulse Lite locally on your machine, follow these steps:
-
-### Prerequisites
-- Python 3.9+
-- Node.js 18+
-- A GitHub Personal Access Token
-- An OpenAI-compatible API Key (e.g., Groq)
-
-### Backend Setup
-1. Open a terminal and navigate to the `backend` directory:
-   ```bash
-   cd backend
-   ```
-2. Create a virtual environment and install dependencies:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-3. Create a `.env` file in the `backend` directory and add your keys:
-   ```env
-   GITHUB_TOKEN=your_github_token_here
-   LLM_API_KEY=your_groq_api_key_here
-   LLM_BASE_URL=https://api.groq.com/openai/v1
-   LLM_MODEL=qwen/qwen3.8-27b
-   ```
-4. Start the FastAPI server:
-   ```bash
-   uvicorn main:app --reload --port 8000
-   ```
-
-### Frontend Setup
-1. Open a new terminal and navigate to the `frontend` directory:
-   ```bash
-   cd frontend
-   ```
-2. Install Node dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Vite development server:
-   ```bash
-   npm run dev
-   ```
-4. Open `http://localhost:5173` in your browser.
+The numerical health score is calculated entirely by the deterministic scoring engine. The LLM is used as an interpretation and reporting layer rather than as the source of the numerical score.
 
 ---
 
-## 📄 API Endpoints
+## Problem Statement
 
-- `GET /api/health` - Check backend status.
-- `POST /api/analyze` - Analyze a GitHub repository.
-  - **Body:** `{ "repo_url": "https://github.com/owner/repo" }`
+Engineering leads often need actionable visibility into repository momentum, commit quality, code churn, contributor distribution, and potentially risky development patterns without manually reviewing hundreds of Git logs.
+
+RepoPulse Lite addresses this problem by converting raw GitHub repository telemetry into:
+
+- A single Repository Health Score
+- Individual engineering-health metrics
+- Contributor distribution insights
+- Commit-quality analysis
+- Code churn analysis
+- Development cadence analysis
+- Anomaly and risk detection
+- An AI-generated executive report
+
+The goal is not to replace engineering judgment, but to provide a fast and explainable first-level assessment of repository health.
 
 ---
 
-*Built for a Technical Assessment.*
+## Key Features
+
+### GitHub Repository Analysis
+
+- Accepts public GitHub repository URLs
+- Validates GitHub repository URLs
+- Retrieves repository metadata
+- Retrieves recent commit telemetry
+- Processes additions, deletions, changed files, authors and commit messages
+
+### Deterministic Health Scoring
+
+RepoPulse Lite calculates a 0–100 score using five dimensions:
+
+1. Code Churn
+2. Commit Hygiene
+3. Commit Cadence / Velocity
+4. Author Entropy / Contributor Distribution
+5. Anomaly Risk
+
+### Risk Detection
+
+The system identifies potentially risky development patterns including:
+
+- Very large commits
+- Excessive file changes
+- High deletion activity
+- Massive atomic rewrites
+- Contributor concentration
+- Poor commit-message hygiene
+
+### AI Executive Audit
+
+An OpenAI-compatible LLM receives the deterministic analysis and produces:
+
+- Executive summary
+- Repository strengths
+- Major risks
+- Engineering concerns
+- Recommendations
+
+### Interactive Dashboard
+
+The frontend provides:
+
+- Overall health score
+- Score breakdown
+- Repository statistics
+- Commit analytics
+- Contributor analytics
+- Risk indicators
+- AI executive report
+- Loading states
+- Error states
+- Responsive UI
+
+---
+
+# System Architecture
+
+```text
+                         ┌─────────────────────┐
+                         │        User         │
+                         │ GitHub Repository URL│
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │   React Frontend    │
+                         │   Analytics UI       │
+                         └──────────┬──────────┘
+                                    │
+                             POST /api/analyze
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │   FastAPI Backend   │
+                         │ URL Validation      │
+                         │ Error Handling      │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │   GitHub REST API   │
+                         │ Repository Telemetry│
+                         │ Commit Telemetry    │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │ Telemetry Processor │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                    ┌───────────────────────────────┐
+                    │ Deterministic Heuristic Engine│
+                    │                               │
+                    │ • Code Churn                  │
+                    │ • Commit Hygiene              │
+                    │ • Cadence / Velocity          │
+                    │ • Author Entropy               │
+                    │ • Anomaly Detection            │
+                    └───────────────┬───────────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │ Health Score 0–100  │
+                         └──────────┬──────────┘
+                                    │
+                         ┌──────────┴──────────┐
+                         │                     │
+                         ▼                     ▼
+                ┌─────────────────┐   ┌─────────────────┐
+                │ Risk / Anomaly  │   │ OpenAI-         │
+                │ Analysis        │   │ Compatible LLM  │
+                └─────────────────┘   └────────┬────────┘
+                                               │
+                                               ▼
+                                      ┌─────────────────┐
+                                      │ Executive Audit │
+                                      └────────┬────────┘
+                                               │
+                                               ▼
+                                      ┌─────────────────┐
+                                      │ React Dashboard │
+                                      └─────────────────┘
