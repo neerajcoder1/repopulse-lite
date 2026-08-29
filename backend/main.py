@@ -1,7 +1,9 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import ValidationError
+import re
 from .models import AnalyzeRequest
+from .services.github import GitHubService
+from .services.heuristic_engine import HeuristicEngine
 
 app = FastAPI(title="RepoPulse Lite API")
 
@@ -13,11 +15,37 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+github_service = GitHubService()
+
 @app.get("/api/health")
 async def health_check():
     return {"status": "ok", "version": "1.0.0"}
 
 @app.post("/api/analyze")
 async def analyze_repo(request: AnalyzeRequest):
-    # TODO: Implement GitHub ingestion and heuristic engine
-    return {"message": "Valid URL received", "url": request.repo_url}
+    # Parse owner and repo from URL
+    match = re.search(r"github\.com/([\w.-]+)/([\w.-]+)/?$", request.repo_url)
+    if not match:
+        raise HTTPException(status_code=400, detail="Invalid GitHub URL format")
+        
+    owner, repo = match.groups()
+    
+    # 1. Fetch metadata
+    repo_meta = await github_service.get_repo_metadata(owner, repo)
+    
+    # 2. Fetch commits
+    commits = await github_service.get_recent_commits(owner, repo, limit=100)
+    
+    # 3. Heuristic Engine
+    engine = HeuristicEngine(commits)
+    analysis = engine.analyze()
+    
+    return {
+        "repo_meta": repo_meta.model_dump(),
+        "analyzed_commits": len(commits),
+        "metrics": analysis["metrics"],
+        "anomaly_flags": analysis["anomaly_flags"],
+        "health_score": analysis["health_score"],
+        "risk_level": analysis["risk_level"],
+        "executive_report": "LLM report not implemented yet."
+    }
