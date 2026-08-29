@@ -1,7 +1,7 @@
 import httpx
 from fastapi import HTTPException
-from ..config import settings
-from ..models import RepoMetadata
+from config import settings
+from models import RepoMetadata
 
 class GitHubService:
     def __init__(self):
