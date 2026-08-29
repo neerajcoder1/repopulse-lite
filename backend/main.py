@@ -4,6 +4,7 @@ import re
 from .models import AnalyzeRequest
 from .services.github import GitHubService
 from .services.heuristic_engine import HeuristicEngine
+from .services.llm import LLMService
 
 app = FastAPI(title="RepoPulse Lite API")
 
@@ -16,6 +17,7 @@ app.add_middleware(
 )
 
 github_service = GitHubService()
+llm_service = LLMService()
 
 @app.get("/api/health")
 async def health_check():
@@ -40,6 +42,15 @@ async def analyze_repo(request: AnalyzeRequest):
     engine = HeuristicEngine(commits)
     analysis = engine.analyze()
     
+    # 4. LLM Executive Report
+    report = await llm_service.generate_executive_report(
+        repo_meta=repo_meta.model_dump(),
+        metrics=analysis["metrics"],
+        anomaly_flags=analysis["anomaly_flags"],
+        health_score=analysis["health_score"],
+        risk_level=analysis["risk_level"]
+    )
+    
     return {
         "repo_meta": repo_meta.model_dump(),
         "analyzed_commits": len(commits),
@@ -47,5 +58,5 @@ async def analyze_repo(request: AnalyzeRequest):
         "anomaly_flags": analysis["anomaly_flags"],
         "health_score": analysis["health_score"],
         "risk_level": analysis["risk_level"],
-        "executive_report": "LLM report not implemented yet."
+        "executive_report": report
     }
