@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Search, AlertTriangle, Github, Activity, Users, GitCommit, FileWarning } from "lucide-react";
+import { Search, AlertTriangle, GitBranch, Activity, Users, GitCommit, FileWarning } from "lucide-react";
 import { analyzeRepo, type AnalysisResult } from "../services/api";
 import { ScoreGauge } from "./ScoreGauge";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
@@ -91,7 +91,7 @@ export const Dashboard = () => {
               <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 lg:col-span-2 flex flex-col justify-between">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <Github className="w-8 h-8 text-gray-700" />
+                    <GitBranch className="w-8 h-8 text-gray-700" />
                     <h2 className="text-2xl font-bold">{result.repo_meta.owner} / {result.repo_meta.name}</h2>
                   </div>
                   <div className="flex gap-4 text-sm text-gray-500 mb-6">
