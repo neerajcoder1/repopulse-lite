@@ -1,10 +1,10 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import re
-from .models import AnalyzeRequest
-from .services.github import GitHubService
-from .services.heuristic_engine import HeuristicEngine
-from .services.llm import LLMService
+from models import AnalyzeRequest
+from services.github import GitHubService
+from services.heuristic_engine import HeuristicEngine
+from services.llm import LLMService
 
 app = FastAPI(title="RepoPulse Lite API")
 
@@ -36,7 +36,7 @@ async def analyze_repo(request: AnalyzeRequest):
     repo_meta = await github_service.get_repo_metadata(owner, repo)
     
     # 2. Fetch commits
-    commits = await github_service.get_recent_commits(owner, repo, limit=100)
+    commits = await github_service.get_recent_commits(owner, repo, limit=15)
     
     # 3. Heuristic Engine
     engine = HeuristicEngine(commits)
