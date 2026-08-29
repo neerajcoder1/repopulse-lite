@@ -9,12 +9,16 @@
 ## Live Demo
 
 **Production Application:**  
-`YOUR_VERCEL_URL`
+https://repopulse-lite-ashen.vercel.app
 
 **Backend API:**  
-`YOUR_RENDER_BACKEND_URL`
+https://repopulse-lite-4jml.onrender.com
 
-> Replace the URLs above after deployment.
+### Deployment
+
+- Frontend: Vercel
+- Backend: Render
+- Source Code: GitHub
 
 ---
 
@@ -168,8 +172,31 @@ The frontend provides:
                                       ┌─────────────────┐
                                       │ Executive Audit │
                                       └────────┬────────┘
+
                                                │
                                                ▼
                                       ┌─────────────────┐
                                       │ React Dashboard │
                                       └─────────────────┘
+````
+# Submission Information
+
+## Required Deliverables
+
+### GitHub Repository
+
+https://github.com/neerajcoder1/repopulse-lite
+
+### Live Production Application
+
+https://repopulse-lite-ashen.vercel.app
+
+### Backend API
+
+https://repopulse-lite-4jml.onrender.com
+
+### Documentation
+
+- `README.md` — Project documentation, architecture, scoring model, setup and deployment
+- `SPEC.md` — System specification and architectural design
+- `DEVELOPMENT_LOG.md` — AI-assisted development and engineering audit
