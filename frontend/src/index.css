@@ -1,2 +1,20 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+.pulse-path {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: pulse-draw 2s linear infinite;
+}
+
+@keyframes pulse-draw {
+  0% {
+    stroke-dashoffset: 200;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -200;
+  }
+}

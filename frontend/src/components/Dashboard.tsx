@@ -76,12 +76,24 @@ export const Dashboard = () => {
         )}
 
         {loading && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse">
-            <div className="h-64 bg-gray-200 rounded-2xl col-span-1 md:col-span-2"></div>
-            <div className="h-64 bg-gray-200 rounded-2xl"></div>
-            <div className="h-48 bg-gray-200 rounded-2xl"></div>
-            <div className="h-48 bg-gray-200 rounded-2xl"></div>
-            <div className="h-48 bg-gray-200 rounded-2xl"></div>
+          <div className="flex flex-col items-center justify-center py-20">
+            <div className="relative w-64 h-24 mb-6">
+              {/* Animated Heartbeat Line */}
+              <svg className="w-full h-full text-blue-500 drop-shadow-lg" viewBox="0 0 100 20" stroke="currentColor" fill="none" strokeWidth="2">
+                <path 
+                  className="pulse-path"
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                  d="M 0,10 L 20,10 L 25,5 L 35,18 L 45,2 L 55,18 L 65,5 L 70,10 L 100,10"
+                />
+              </svg>
+            </div>
+            <h2 className="text-xl font-semibold text-gray-700 animate-pulse">
+              Analyzing Repository Health...
+            </h2>
+            <p className="text-gray-400 mt-2">
+              Fetching commits, building telemetry, and consulting LLM engine
+            </p>
           </div>
         )}
 
