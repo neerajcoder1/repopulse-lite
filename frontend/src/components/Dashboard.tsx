@@ -3,6 +3,7 @@ import { Search, AlertTriangle, GitBranch, Activity, Users, GitCommit, FileWarni
 import { analyzeRepo, type AnalysisResult } from "../services/api";
 import { ScoreGauge } from "./ScoreGauge";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from "recharts";
+import ReactMarkdown from "react-markdown";
 
 export const Dashboard = () => {
   const [url, setUrl] = useState("");
@@ -150,8 +151,8 @@ export const Dashboard = () => {
               {/* LLM Report */}
               <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 lg:col-span-2">
                 <h3 className="text-lg font-semibold mb-4">Executive Summary</h3>
-                <div className="prose prose-sm max-w-none text-gray-700 whitespace-pre-wrap">
-                  {result.executive_report}
+                <div className="prose prose-sm prose-blue max-w-none text-gray-700">
+                  <ReactMarkdown>{result.executive_report}</ReactMarkdown>
                 </div>
               </div>
 
